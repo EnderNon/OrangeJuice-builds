@@ -6,14 +6,10 @@ import cc.polyfrost.oneconfig.hud.TextHud;
 
 import java.util.List;
 
-/**
- * An example OneConfig HUD that is started in the config and displays text.
- *
- * @see SimpleModConfig#hud
- */
 public class SprintHud extends TextHud {
     public SprintHud() {
-        super(true);
+        super(true, 0, 1080);
+        this.scale = 1.2f;
     }
 
     @Override

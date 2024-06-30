@@ -1,11 +1,9 @@
 package cat.porter.simplemod.command;
 
 import cat.porter.simplemod.SimpleMod;
-import cc.polyfrost.oneconfig.libs.universal.UKeyboard;
 import cc.polyfrost.oneconfig.utils.commands.annotations.Command;
 import cc.polyfrost.oneconfig.utils.commands.annotations.Main;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.settings.KeyBinding;
 
 /**
  * An example command implementing the Command api of OneConfig.

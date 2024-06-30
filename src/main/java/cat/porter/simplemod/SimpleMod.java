@@ -4,9 +4,9 @@ import cat.porter.simplemod.command.ClearChatCommand;
 import cat.porter.simplemod.command.GuiCommand;
 import cat.porter.simplemod.config.SimpleModConfig;
 import cc.polyfrost.oneconfig.events.event.InitializationEvent;
+import cc.polyfrost.oneconfig.utils.commands.CommandManager;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
-import cc.polyfrost.oneconfig.utils.commands.CommandManager;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,6 +29,7 @@ public class SimpleMod {
     public static SimpleMod INSTANCE; // Adds the instance of the mod, so we can access other variables.
     public static SimpleModConfig config;
     public boolean hasEvergreen = false;
+    public boolean hasPotionEffects = false;
 
     // Register the config and commands.
     @Mod.EventHandler
@@ -38,5 +39,6 @@ public class SimpleMod {
         CommandManager.INSTANCE.registerCommand(new GuiCommand());
         CommandManager.INSTANCE.registerCommand(new ClearChatCommand());
         hasEvergreen = Loader.isModLoaded("evergreenhud");
+        hasPotionEffects = Loader.isModLoaded("potioneffects");
     }
 }

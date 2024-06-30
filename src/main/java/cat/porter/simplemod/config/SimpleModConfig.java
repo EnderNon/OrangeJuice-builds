@@ -9,15 +9,27 @@ import cc.polyfrost.oneconfig.config.data.Mod;
 import cc.polyfrost.oneconfig.config.data.ModType;
 import cc.polyfrost.oneconfig.config.data.PageLocation;
 import cc.polyfrost.oneconfig.libs.universal.UKeyboard;
-import kotlin.jvm.JvmField;
+import cc.polyfrost.oneconfig.utils.NetworkUtils;
+import me.tellinq.potioneffects.config.PotionEffectsConfig;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiConfirmOpenLink;
 import org.polyfrost.evergreenhud.config.ModConfig;
-import org.polyfrost.evergreenhud.hud.Direction;
 
 /**
  * The main Config entrypoint that extends the Config type and inits the config options.
  * See <a href="https://docs.polyfrost.cc/oneconfig/config/adding-options">this link</a> for more config Options
  */
 public class SimpleModConfig extends Config {
+
+    public Runnable downloadEvergreenHUD = () -> {
+        Minecraft.getMinecraft().displayGuiScreen(new GuiConfirmOpenLink((clicked, id) -> {
+            if (clicked) {
+                NetworkUtils.browseLink("https://modrinth.com/mod/evergreenhud");
+                Minecraft.getMinecraft().displayGuiScreen(null);
+            }
+            else this.openGui();
+        }, "https://modrinth.com/mod/evergreenhud", 31102009, true));
+    };
 
     @Switch(
             name = "Toggle Sprint",
@@ -85,11 +97,18 @@ public class SimpleModConfig extends Config {
     public AddressHudConfig addressHudConfig = new AddressHudConfig();
 
     @Info(
-            text = "EvergreenHUD needs to be installed to use this feature.",
+            text = "EvergreenHUD is required to use this feature.",
             type = InfoType.WARNING, // Types are: INFO, WARNING, ERROR, SUCCESS
             category = "ArmorHUD"
     )
     public static boolean armorwarning; // Useless. Java limitations with @annotation.
+
+    @Button(
+            name = "Download EvergreenHUD",
+            text = "Download",
+            category = "ArmorHUD"
+    )
+    Runnable downloadArmorHUD = downloadEvergreenHUD;
 
     @Button(
             name = "Open ArmorHUD Config",
@@ -102,20 +121,61 @@ public class SimpleModConfig extends Config {
     };
 
     @Info(
-            text = "EvergreenHUD needs to be installed to use this feature.",
+            text = "EvergreenHUD is required to use this feature.",
             type = InfoType.WARNING, // Types are: INFO, WARNING, ERROR, SUCCESS
-            category = "Direction"
+            category = "DirectionHUD"
     )
     public static boolean directionwarning; // Useless. Java limitations with @annotation.
 
     @Button(
+            name = "Download EvergreenHUD",
+            text = "Download",
+            category = "DirectionHUD"
+    )
+    Runnable downloadDirectionHUD = downloadEvergreenHUD;
+
+    @Button(
             name = "Open DirectionHUD Config",
             text = "Open Evergreen",
-            category = "Direction"
+            category = "DirectionHUD"
     )
     Runnable openDirectionHudConfig = () -> {
         if(SimpleMod.INSTANCE.hasEvergreen)
             ModConfig.INSTANCE.getDirection().openGui();
+    };
+
+    @Info(
+            text = "Tellinq's Potion Effects is required to use this feature.",
+            type = InfoType.WARNING, // Types are: INFO, WARNING, ERROR, SUCCESS
+            category = "Status Effects"
+    )
+    public static boolean statuseffectswarning; // Useless. Java limitations with @annotation.
+
+    @Button(
+            name = "Download Potion Effects",
+            text = "Download",
+            category = "Status Effects"
+    )
+    Runnable downloadPotionEffects = () -> {
+        Minecraft.getMinecraft().displayGuiScreen(new GuiConfirmOpenLink((clicked, id) -> {
+            if(clicked) {
+                NetworkUtils.browseLink("https://github.com/Tellinq/Potion-Effects/releases/tag/v1.0");
+                Minecraft.getMinecraft().displayGuiScreen(null);
+
+            }
+            else this.openGui();
+
+        } , "https://github.com/Tellinq/Potion-Effects/releases/tag/v1.0", 31102009, true));
+    };
+
+    @Button(
+            name = "Open Potion Effects Config",
+            text = "Open Potion Effects",
+            category = "Status Effects"
+    )
+    Runnable openPotionEffectsConfig = () -> {
+        if(SimpleMod.INSTANCE.hasPotionEffects)
+            PotionEffectsConfig.INSTANCE.openGui();
     };
 
 
@@ -129,8 +189,10 @@ public class SimpleModConfig extends Config {
         addDependency("showServerPing", "showServerAddress");
         addDependency("openDirectionHudConfig", "hasEvergreen", () -> SimpleMod.INSTANCE.hasEvergreen);
         addDependency("openArmorHudConfig", "hasEvergreen", () -> SimpleMod.INSTANCE.hasEvergreen);
-        addDependency("armorwarning", "hasEvergreen", () -> !SimpleMod.INSTANCE.hasEvergreen);
-        addDependency("directionwarning", "hasEvergreen", () -> !SimpleMod.INSTANCE.hasEvergreen);
+        addDependency("openPotionEffectsConfig", "hasPotionEffects", () -> SimpleMod.INSTANCE.hasPotionEffects);
+        addDependency("downloadArmorHUD", "hasEvergreen", () -> !SimpleMod.INSTANCE.hasEvergreen);
+        addDependency("downloadDirectionHUD", "hasEvergreen", () -> !SimpleMod.INSTANCE.hasEvergreen);
+        addDependency("downloadPotionEffects", "hasPotionEffects", () -> !SimpleMod.INSTANCE.hasPotionEffects);
 
         registerKeyBind(toggleSprintKey, () -> {
             if(this.enabled && toggleSprint) {
