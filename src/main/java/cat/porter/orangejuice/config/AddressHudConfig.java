@@ -1,6 +1,6 @@
-package cat.porter.simplemod.config;
+package cat.porter.orangejuice.config;
 
-import cat.porter.simplemod.hud.AddressHud;
+import cat.porter.orangejuice.hud.AddressHud;
 import cc.polyfrost.oneconfig.config.annotations.HUD;
 
 public class AddressHudConfig {

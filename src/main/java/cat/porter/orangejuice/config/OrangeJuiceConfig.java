@@ -1,6 +1,6 @@
-package cat.porter.simplemod.config;
+package cat.porter.orangejuice.config;
 
-import cat.porter.simplemod.SimpleMod;
+import cat.porter.orangejuice.OrangeJuice;
 import cc.polyfrost.oneconfig.config.Config;
 import cc.polyfrost.oneconfig.config.annotations.*;
 import cc.polyfrost.oneconfig.config.core.OneKeyBind;
@@ -19,7 +19,7 @@ import org.polyfrost.evergreenhud.config.ModConfig;
  * The main Config entrypoint that extends the Config type and inits the config options.
  * See <a href="https://docs.polyfrost.cc/oneconfig/config/adding-options">this link</a> for more config Options
  */
-public class SimpleModConfig extends Config {
+public class OrangeJuiceConfig extends Config {
 
     public Runnable downloadEvergreenHUD = () -> {
         Minecraft.getMinecraft().displayGuiScreen(new GuiConfirmOpenLink((clicked, id) -> {
@@ -116,7 +116,7 @@ public class SimpleModConfig extends Config {
             category = "ArmorHUD"
     )
     Runnable openArmorHudConfig = () -> {
-        if(SimpleMod.INSTANCE.hasEvergreen)
+        if(OrangeJuice.INSTANCE.hasEvergreen)
             ModConfig.INSTANCE.getArmour().openGui();
     };
 
@@ -140,7 +140,7 @@ public class SimpleModConfig extends Config {
             category = "DirectionHUD"
     )
     Runnable openDirectionHudConfig = () -> {
-        if(SimpleMod.INSTANCE.hasEvergreen)
+        if(OrangeJuice.INSTANCE.hasEvergreen)
             ModConfig.INSTANCE.getDirection().openGui();
     };
 
@@ -174,25 +174,25 @@ public class SimpleModConfig extends Config {
             category = "Status Effects"
     )
     Runnable openPotionEffectsConfig = () -> {
-        if(SimpleMod.INSTANCE.hasPotionEffects)
+        if(OrangeJuice.INSTANCE.hasPotionEffects)
             PotionEffectsConfig.INSTANCE.openGui();
     };
 
 
-    public SimpleModConfig() {
-        super(new Mod(SimpleMod.NAME, ModType.UTIL_QOL), SimpleMod.MODID + ".json");
+    public OrangeJuiceConfig() {
+        super(new Mod(OrangeJuice.NAME, ModType.UTIL_QOL), OrangeJuice.MODID + ".json");
         initialize();
         addDependency("toggleSprintKey", "toggleSprint");
         addDependency("sprintText", "toggleSprint");
         addDependency("hidePingOnHypixel", "showServerPing");
         addDependency("hideFakePing", "showServerPing");
         addDependency("showServerPing", "showServerAddress");
-        addDependency("openDirectionHudConfig", "hasEvergreen", () -> SimpleMod.INSTANCE.hasEvergreen);
-        addDependency("openArmorHudConfig", "hasEvergreen", () -> SimpleMod.INSTANCE.hasEvergreen);
-        addDependency("openPotionEffectsConfig", "hasPotionEffects", () -> SimpleMod.INSTANCE.hasPotionEffects);
-        addDependency("downloadArmorHUD", "hasEvergreen", () -> !SimpleMod.INSTANCE.hasEvergreen);
-        addDependency("downloadDirectionHUD", "hasEvergreen", () -> !SimpleMod.INSTANCE.hasEvergreen);
-        addDependency("downloadPotionEffects", "hasPotionEffects", () -> !SimpleMod.INSTANCE.hasPotionEffects);
+        addDependency("openDirectionHudConfig", "hasEvergreen", () -> OrangeJuice.INSTANCE.hasEvergreen);
+        addDependency("openArmorHudConfig", "hasEvergreen", () -> OrangeJuice.INSTANCE.hasEvergreen);
+        addDependency("openPotionEffectsConfig", "hasPotionEffects", () -> OrangeJuice.INSTANCE.hasPotionEffects);
+        addDependency("downloadArmorHUD", "hasEvergreen", () -> !OrangeJuice.INSTANCE.hasEvergreen);
+        addDependency("downloadDirectionHUD", "hasEvergreen", () -> !OrangeJuice.INSTANCE.hasEvergreen);
+        addDependency("downloadPotionEffects", "hasPotionEffects", () -> !OrangeJuice.INSTANCE.hasPotionEffects);
 
         registerKeyBind(toggleSprintKey, () -> {
             if(this.enabled && toggleSprint) {

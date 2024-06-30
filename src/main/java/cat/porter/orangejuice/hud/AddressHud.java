@@ -1,7 +1,7 @@
-package cat.porter.simplemod.hud;
+package cat.porter.orangejuice.hud;
 
-import cat.porter.simplemod.SimpleMod;
-import cat.porter.simplemod.config.SimpleModConfig;
+import cat.porter.orangejuice.OrangeJuice;
+import cat.porter.orangejuice.config.OrangeJuiceConfig;
 import cc.polyfrost.oneconfig.hud.TextHud;
 import cc.polyfrost.oneconfig.platform.Platform;
 import cc.polyfrost.oneconfig.utils.hypixel.HypixelUtils;
@@ -17,19 +17,19 @@ public class AddressHud extends TextHud {
 
     @Override
     public boolean shouldShow() {
-        return super.shouldShow() && Minecraft.getMinecraft().gameSettings.keyBindPlayerList.isKeyDown() ^  SimpleModConfig.hideWhenPlayerListVisible ;
+        return super.shouldShow() && Minecraft.getMinecraft().gameSettings.keyBindPlayerList.isKeyDown() ^  OrangeJuiceConfig.hideWhenPlayerListVisible ;
     }
 
     @Override
     public void getLines(List<String> lines, boolean example) {
-        if (SimpleMod.INSTANCE.config.enabled && SimpleModConfig.showServerAddress && Platform.getServerPlatform().inMultiplayer()) {
+        if (OrangeJuice.INSTANCE.config.enabled && OrangeJuiceConfig.showServerAddress && Platform.getServerPlatform().inMultiplayer()) {
             String text = Minecraft.getMinecraft().getCurrentServerData().serverIP;
-            if (SimpleModConfig.showServerPing) {
-                if (HypixelUtils.INSTANCE.isHypixel() && !SimpleModConfig.hidePingOnHypixel) {
+            if (OrangeJuiceConfig.showServerPing) {
+                if (HypixelUtils.INSTANCE.isHypixel() && !OrangeJuiceConfig.hidePingOnHypixel) {
                     NetworkPlayerInfo info = Minecraft.getMinecraft().getNetHandler().getPlayerInfo(Minecraft.getMinecraft().thePlayer.getGameProfile().getId());
                     if (info != null) {
                         int ping = info.getResponseTime();
-                        if((ping > 1 && ping < 999) || !SimpleModConfig.hideFakePing) {
+                        if((ping > 1 && ping < 999) || !OrangeJuiceConfig.hideFakePing) {
                             text += " (" + ping + "ms)";
 
                         }

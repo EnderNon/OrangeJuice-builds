@@ -1,6 +1,6 @@
-package cat.porter.simplemod.config;
+package cat.porter.orangejuice.config;
 
-import cat.porter.simplemod.hud.SprintHud;
+import cat.porter.orangejuice.hud.SprintHud;
 import cc.polyfrost.oneconfig.config.annotations.HUD;
 
 public class SprintHudConfig {

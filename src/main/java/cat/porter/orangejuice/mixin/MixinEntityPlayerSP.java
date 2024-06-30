@@ -1,7 +1,7 @@
-package cat.porter.simplemod.mixin;
+package cat.porter.orangejuice.mixin;
 
-import cat.porter.simplemod.SimpleMod;
-import cat.porter.simplemod.config.SimpleModConfig;
+import cat.porter.orangejuice.OrangeJuice;
+import cat.porter.orangejuice.config.OrangeJuiceConfig;
 import cc.polyfrost.oneconfig.libs.universal.UScreen;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -27,7 +27,7 @@ public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
             )
     )
     private boolean setSprintState(KeyBinding keyBinding) {
-        return keyBinding.isKeyDown() || UScreen.getCurrentScreen() == null && SimpleMod.INSTANCE.config.enabled && SimpleModConfig.toggleSprint && SimpleMod.INSTANCE.config.toggleSprintState;
+        return keyBinding.isKeyDown() || UScreen.getCurrentScreen() == null && OrangeJuice.INSTANCE.config.enabled && OrangeJuiceConfig.toggleSprint && OrangeJuice.INSTANCE.config.toggleSprintState;
     }
 
 }

@@ -1,8 +1,9 @@
-package cat.porter.simplemod.command;
+package cat.porter.orangejuice.command;
 
-import cat.porter.simplemod.SimpleMod;
+import cat.porter.orangejuice.OrangeJuice;
 import cc.polyfrost.oneconfig.utils.commands.annotations.Command;
 import cc.polyfrost.oneconfig.utils.commands.annotations.Main;
+import net.minecraft.client.Minecraft;
 
 /**
  * An example command implementing the Command api of OneConfig.
@@ -10,12 +11,12 @@ import cc.polyfrost.oneconfig.utils.commands.annotations.Main;
  *
  * @see Command
  * @see Main
- * @see SimpleMod
+ * @see OrangeJuice
  */
-@Command(value = SimpleMod.MODID, description = "Access the " + SimpleMod.NAME + " GUI.")
-public class GuiCommand {
+@Command(value = "clearchat", description = "Clears all messages in chat.", aliases = { "cc" })
+public class ClearChatCommand {
     @Main
     private void handle() {
-        SimpleMod.INSTANCE.config.openGui();
+        Minecraft.getMinecraft().ingameGUI.getChatGUI().clearChatMessages();
     }
 }
