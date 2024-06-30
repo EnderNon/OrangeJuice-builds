@@ -1,13 +1,13 @@
 {
   "compatibilityLevel": "JAVA_8",
   "minVersion": "0.7",
-  "package": "org.polyfrost.example.mixin",
+  "package": "cat.porter.simplemod.mixin",
   "refmap": "mixins.${id}.refmap.json",
   "injectors": {
     "maxShiftBy": 5
   },
   "client": [
-    "MinecraftMixin"
+    "MixinEntityPlayerSP",
   ],
   "verbose": true
 }

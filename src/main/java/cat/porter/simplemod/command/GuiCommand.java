@@ -1,6 +1,6 @@
-package org.polyfrost.example.command;
+package cat.porter.simplemod.command;
 
-import org.polyfrost.example.ExampleMod;
+import cat.porter.simplemod.SimpleMod;
 import cc.polyfrost.oneconfig.utils.commands.annotations.Command;
 import cc.polyfrost.oneconfig.utils.commands.annotations.Main;
 
@@ -10,12 +10,12 @@ import cc.polyfrost.oneconfig.utils.commands.annotations.Main;
  *
  * @see Command
  * @see Main
- * @see ExampleMod
+ * @see SimpleMod
  */
-@Command(value = ExampleMod.MODID, description = "Access the " + ExampleMod.NAME + " GUI.")
-public class ExampleCommand {
+@Command(value = SimpleMod.MODID, description = "Access the " + SimpleMod.NAME + " GUI.")
+public class GuiCommand {
     @Main
     private void handle() {
-        ExampleMod.INSTANCE.config.openGui();
+        SimpleMod.INSTANCE.config.openGui();
     }
 }
