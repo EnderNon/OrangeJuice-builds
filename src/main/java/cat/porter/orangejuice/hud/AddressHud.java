@@ -17,11 +17,17 @@ public class AddressHud extends TextHud {
 
     @Override
     public boolean shouldShow() {
-        return super.shouldShow() && Minecraft.getMinecraft().gameSettings.keyBindPlayerList.isKeyDown() ^  OrangeJuiceConfig.hideWhenPlayerListVisible ;
+        return super.shouldShow() && !(OrangeJuiceConfig.hideWhenPlayerListVisible && Minecraft.getMinecraft().gameSettings.keyBindPlayerList.isKeyDown());
     }
 
     @Override
     public void getLines(List<String> lines, boolean example) {
+        if(example) {
+            String text = "mc.hypixel.net";
+            if(OrangeJuiceConfig.showServerPing) text += " (35ms)";
+            return;
+        }
+
         if (OrangeJuice.INSTANCE.config.enabled && OrangeJuiceConfig.showServerAddress && Platform.getServerPlatform().inMultiplayer()) {
             String text = Minecraft.getMinecraft().getCurrentServerData().serverIP;
             if (OrangeJuiceConfig.showServerPing) {
@@ -29,7 +35,7 @@ public class AddressHud extends TextHud {
                     NetworkPlayerInfo info = Minecraft.getMinecraft().getNetHandler().getPlayerInfo(Minecraft.getMinecraft().thePlayer.getGameProfile().getId());
                     if (info != null) {
                         int ping = info.getResponseTime();
-                        if((ping > 1 && ping < 999) || !OrangeJuiceConfig.hideFakePing) {
+                        if ((ping > 1 && ping < 999) || !OrangeJuiceConfig.hideFakePing) {
                             text += " (" + ping + "ms)";
 
                         }

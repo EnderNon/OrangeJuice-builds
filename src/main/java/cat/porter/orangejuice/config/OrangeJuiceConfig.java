@@ -190,9 +190,14 @@ public class OrangeJuiceConfig extends Config {
         addDependency("openDirectionHudConfig", "hasEvergreen", () -> OrangeJuice.INSTANCE.hasEvergreen);
         addDependency("openArmorHudConfig", "hasEvergreen", () -> OrangeJuice.INSTANCE.hasEvergreen);
         addDependency("openPotionEffectsConfig", "hasPotionEffects", () -> OrangeJuice.INSTANCE.hasPotionEffects);
-        addDependency("downloadArmorHUD", "hasEvergreen", () -> !OrangeJuice.INSTANCE.hasEvergreen);
-        addDependency("downloadDirectionHUD", "hasEvergreen", () -> !OrangeJuice.INSTANCE.hasEvergreen);
-        addDependency("downloadPotionEffects", "hasPotionEffects", () -> !OrangeJuice.INSTANCE.hasPotionEffects);
+        hideIf("armorwarning", () -> OrangeJuice.INSTANCE.hasEvergreen);
+        hideIf("downloadArmorHUD", () -> OrangeJuice.INSTANCE.hasEvergreen);
+
+        hideIf("directionwarning", () -> OrangeJuice.INSTANCE.hasEvergreen);
+        hideIf("downloadDirectionHUD", () -> OrangeJuice.INSTANCE.hasEvergreen);
+
+        hideIf("statuseffectswarning", () -> OrangeJuice.INSTANCE.hasPotionEffects);
+        hideIf("downloadPotionEffects", () -> OrangeJuice.INSTANCE.hasPotionEffects);
 
         registerKeyBind(toggleSprintKey, () -> {
             if(this.enabled && toggleSprint) {
