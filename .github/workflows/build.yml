@@ -52,3 +52,8 @@ jobs:
         with:
           name: artifacts
           path: versions/**/build/libs/
+      - name: Create Release
+        uses: ncipollo/release-action@v1.16.0
+        with:
+          artifacts: "versions/**/build/libs/*.jar"
+          bodyFile: "release-body.md"
